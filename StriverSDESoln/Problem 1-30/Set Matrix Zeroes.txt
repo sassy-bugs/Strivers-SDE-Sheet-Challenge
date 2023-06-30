@@ -1,0 +1,36 @@
+/*Set Matrix Zeroes*/
+
+import java.io.*;
+import java.util.* ;
+
+public class Solution {
+    public static void setZeros(int matrix[][]) {
+        // Write your code here..
+        Set<Integer> cols = new HashSet<>();
+        for(int i=0; i<matrix.length; i++)
+        {
+            int k=0;
+            for(int j=0; j<matrix[i].length; j++)
+            {
+                if(matrix[i][j]==0)
+                {
+                    cols.add(j);
+                    k++;
+                }
+            }
+            if(k>0)
+            {
+                for(int j=0;j<matrix[i].length;j++)
+                matrix[i][j]=0;
+            }
+        }
+        for(int col:cols)
+        {
+            for(int i=0;i<matrix.length; i++)
+            {
+                matrix[i][col]=0;
+            }
+        }
+    }
+
+}
