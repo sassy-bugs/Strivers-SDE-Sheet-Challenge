@@ -1,0 +1,61 @@
+/*Rotate Matrix*/
+
+import java.io.*;
+import java.util.* ;
+
+import java.util.ArrayList;
+
+public class Solution {
+    public static void rotateMatrix(ArrayList<ArrayList<Integer>> mat, int n, int m) {
+        // Write your code here.
+        int row = mat.size();
+        int col = mat.get(0).size();
+        int ru = 0, cu=0;
+        int rl=row-1,cl=col-1;
+        
+        while(cu<cl && ru<rl)
+        {
+            int prev = mat.get(ru+1).get(cu);
+            
+            for(int j=cu;j<=cl;j++)
+            {
+                int temp = mat.get(ru).get(j);
+                mat.get(ru).remove(j);
+                mat.get(ru).add(j,prev);
+                prev=temp;
+
+            }
+            ru++;
+            for(int i=ru;i<=rl;i++)
+            {
+                int temp = mat.get(i).get(cl);
+                mat.get(i).remove(cl);
+                mat.get(i).add(cl,prev);
+                prev = temp;
+            }
+            cl--;
+            if(ru<=rl)
+            {
+                for(int j =cl; j>=cu; j--)
+                {
+                    int temp = mat.get(rl).get(j);
+                    mat.get(rl).remove(j);
+                    mat.get(rl).add(j,prev);
+                    prev=temp;
+                }
+                rl--;
+            }
+            if(cu<=cl)
+            {
+                for(int i=rl;i>=ru;i--)
+                {
+                    int temp = mat.get(i).get(cu);
+                    mat.get(i).remove(cu);
+                    mat.get(i).add(cu,prev);
+                    prev = temp;
+                }
+                cu++;
+            }
+        }
+    }
+}

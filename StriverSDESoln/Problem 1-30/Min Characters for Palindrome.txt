@@ -1,0 +1,29 @@
+/*Min Characters for Palindrome*/
+
+public class Solution {
+
+    public static int minCharsforPalindrome(String str) {
+        //Write your code here
+        int low = 0;
+        int high = str.length()-1;
+        int res = 0;
+
+        while(low<high)
+        {
+            if(str.charAt(low)==str.charAt(high))
+            {
+                low++;
+                high--;
+            }
+            else
+            {
+                res++;
+                low = 0;
+                high = str.length()-1-res;
+            }
+        }
+
+        return res;
+    }
+
+}

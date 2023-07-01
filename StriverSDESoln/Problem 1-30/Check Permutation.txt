@@ -1,0 +1,29 @@
+/*Check Permutation*/
+
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static boolean areAnagram(String str1, String str2){
+        // Write your code here.
+        if(str1.length()!=str2.length()) return false;
+        HashMap<Character, Integer> m1 = new HashMap<>();
+        HashMap<Character, Integer> m2 = new HashMap<>();
+        for(char ch: str1.toCharArray())
+        {
+            if(!m1.containsKey(ch)) m1.put(ch,0);
+            m1.put(ch, m1.get(ch)+1);
+        }
+        for(char ch: str2.toCharArray())
+        {
+            if(!m2.containsKey(ch)) m2.put(ch,0);
+            m2.put(ch, m2.get(ch)+1);
+        }
+
+        for(char ch: m1.keySet())
+        {
+            if(!m2.containsKey(ch) || m2.get(ch)!=m1.get(ch)) return false;
+        }
+
+        return true;
+    }
+}
