@@ -1,0 +1,20 @@
+/*Majority Element*/
+
+import java.io.*;
+import java.util.* ;
+
+public class Solution {
+	public static int findMajority(int[] arr, int n) {
+		// Write your code here.
+		int freq = n/2;
+		HashMap<Integer, Integer> mp = new HashMap<>();
+		for(int num: arr)
+		{
+			if(!mp.containsKey(num)) mp.put(num,0);
+			mp.put(num,mp.get(num)+1);
+
+			if(mp.get(num)>freq) return num;
+		}
+		return -1;
+	}
+}

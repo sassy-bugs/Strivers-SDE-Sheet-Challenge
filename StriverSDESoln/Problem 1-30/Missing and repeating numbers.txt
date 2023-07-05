@@ -1,0 +1,31 @@
+/*Missing and repeating numbers*/
+
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+
+    public static int[] missingAndRepeating(ArrayList<Integer> arr, int n) {
+        // Write your code here
+        int res[] = new int[2];
+        int s = 0;
+        for(int i=0; i<n;i++)
+        {
+            int idx = Math.abs(arr.get(i));
+            s+=idx;
+            if(arr.get(idx-1)>0)
+            {
+                arr.add(idx-1, -arr.get(idx-1));
+                arr.remove(idx);
+            }
+            else
+            {
+                res[1] = idx;
+            }
+        }
+        res[0] = (int)(n*(n+1)/2)+res[1]-s;
+        return res;
+    
+    }
+}

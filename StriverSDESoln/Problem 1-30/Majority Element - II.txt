@@ -1,0 +1,28 @@
+/*Majority Element - II*/
+
+import java.io.*;
+import java.util.* ;
+
+import java.util.ArrayList;
+
+public class Solution 
+{
+    public static ArrayList<Integer> majorityElementII(ArrayList<Integer> arr) 
+    {
+        // Write your code here.
+        int freq = arr.size()/3;
+        ArrayList<Integer> res = new ArrayList<>();
+
+        HashMap<Integer, Integer> mp = new HashMap<>();
+        Set<Integer> visited = new HashSet<>();
+        for(int num: arr)
+        {
+            if(!mp.containsKey(num)) mp.put(num,0);
+            mp.put(num, mp.get(num)+1);
+            if(mp.get(num)>freq && !visited.contains(num))
+            {res.add(num);
+            visited.add(num);}
+        }
+        return res;
+    }
+}
