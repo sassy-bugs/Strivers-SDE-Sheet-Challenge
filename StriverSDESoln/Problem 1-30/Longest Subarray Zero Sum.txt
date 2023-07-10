@@ -1,0 +1,32 @@
+/*Longest Subarray Zero Sum*/
+
+import java.io.*;
+import java.util.* ;
+
+import java.util.ArrayList;
+
+public class Solution {
+
+	public static int LongestSubsetWithZeroSum(ArrayList<Integer> arr) {
+
+		// Write your code here.
+		int max = 0;
+		int sum=0;
+		int n = arr.size();
+		HashMap<Integer, Integer> mp = new HashMap<>();
+		//mp.put(arr.get(0),0);
+		for(int i=0; i<n; i++)
+		{
+			sum+=arr.get(i);
+			if(sum == 0) max = i+1;
+
+			if(mp.containsKey(sum))
+			{
+				max = Math.max(max,i-mp.get(sum));
+			}
+			else mp.put(sum,i);
+		}
+		return max;
+
+	}
+}}

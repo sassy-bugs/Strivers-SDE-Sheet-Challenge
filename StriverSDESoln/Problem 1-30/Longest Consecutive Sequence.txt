@@ -1,0 +1,30 @@
+/*Longest Consecutive Sequence*/
+
+import java.io.*;
+import java.util.* ;
+
+public class Solution {
+    public static int lengthOfLongestConsecutiveSequence(int[] arr, int N) {
+        // Write your code here.
+        int maxl = 1;
+        int curr = 1;
+        Arrays.sort(arr);
+        for(int i=1; i<arr.length; i++)
+        {
+            //System.out.println(curr+"*"+arr[i]);
+            if(arr[i]==arr[i-1]) continue;
+            if(arr[i]==arr[i-1]+1){
+                 curr++;
+                 maxl = Math.max(curr,maxl);
+                 //continue;
+            }
+            else
+            {
+                //System.out.println("~"+curr);
+                maxl = Math.max(curr,maxl);
+                curr=1;
+            }
+        }
+        return maxl;
+    }
+}

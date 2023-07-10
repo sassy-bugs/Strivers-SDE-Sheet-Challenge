@@ -1,0 +1,75 @@
+/*Reverse Pairs*/
+
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution 
+{
+    public static int reversePairs(ArrayList<Integer> arr) 
+    {
+        // Write your code here.
+        int res = 0;
+        return helper(0,arr.size()-1,arr);
+    }
+    static int helper(int low, int high, ArrayList<Integer> arr)
+    {
+        if(low<high)
+        {
+            int mid = low+(high-low)/2;
+            int m = helper(low,mid,arr)+helper(mid+1,high,arr);
+
+            for(int i =low, j = mid+1; i<=mid; i++)
+            {
+                while(j<=high && arr.get(i)/2.0 > arr.get(j)) j++;
+                m+= j-(mid+1);
+            }
+            Collections.sort(arr.subList(low, high+1));
+            //System.out.println(arr +" "+low+"-"+high);
+            return m;
+        }
+        else
+        return 0;
+    }
+    
+    // static void merge(int low, int mid, int high, ArrayList<Integer> arr)
+    // {
+    //     ArrayList<Integer> list = (ArrayList)arr.clone();
+    //     int i=low;
+    //     int j=mid+1;
+    //     int k = low;
+    //     while(i<=mid && j<=high)
+    //     {
+    //         if(list.get(i)<list.get(j))
+    //         {
+    //             arr.remove(i);
+    //             arr.add(k-1,list.get(i));
+                
+    //             i++;
+    //         }
+    //         else{
+    //             arr.remove(j);
+    //             arr.add(k-1,list.get(i));
+                
+    //             j++;
+    //         }
+    //         k++;
+    //     }
+    //     while(i<=mid)
+    //     {
+    //         arr.remove(i);
+    //         arr.add(k-1,list.get(i));
+            
+    //         i++;
+    //         k++;
+    //     }
+    //     while(j<=high)
+    //     {
+    //         arr.remove(j);
+    //         arr.add(k-1,list.get(i));
+            
+    //         j++;
+    //         k++;
+    //     }
+    // }
+}

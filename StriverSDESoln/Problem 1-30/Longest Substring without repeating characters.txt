@@ -1,0 +1,34 @@
+/*Longest Substring without repeating characters*/
+
+import java.util.* ;
+import java.io.*; 
+public class Solution 
+{
+	public static int uniqueSubstrings(String input) 
+    {
+		//write your code here
+		Set<Character> visited = new HashSet<>();
+		int start = 0;
+		int max = 1;
+
+		for(int right=0; right<input.length();right++)
+		{
+			char ch = input.charAt(right);
+			if(visited.contains(ch))
+			{
+				while(input.charAt(start)!=ch && start<right)
+				{
+					visited.remove(input.charAt(start));
+					start++;
+				}
+				visited.remove(ch);
+				start++;
+
+			}
+			max = Math.max(right-start+1, max);
+			visited.add(ch);
+		}
+		return max;
+	}
+}
+}}

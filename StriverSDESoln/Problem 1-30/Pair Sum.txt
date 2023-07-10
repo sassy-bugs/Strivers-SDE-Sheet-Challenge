@@ -1,0 +1,48 @@
+/*Pair Sum*/
+
+import java.io.*;
+import java.util.* ;
+
+public class Solution{
+    public static List<int[]> pairSum(int[] arr, int s) {
+        // Write your code here.
+        HashMap<Integer, Integer> mp = new HashMap<>();
+        for(int num: arr)
+        {
+            if(!mp.containsKey(num)) mp.put(num,0);
+            mp.put(num, mp.get(num)+1);
+        }
+        List<int[]> res = new ArrayList<>();
+        for(int keys: mp.keySet())
+        {
+            int diff = s-keys;
+            if(diff==keys)
+            {
+                int f = mp.get(keys);
+                if(f<=1) continue;
+                int fact = (int)((f*(f-1))/2);
+                for(int i=0; i<fact; i++)
+                {
+                    res.add(new int[]{diff, diff});
+                }
+                mp.put(keys,0);
+                mp.put(diff,0);
+            }
+            if(mp.containsKey(diff) &&mp.get(diff)>0)
+            {
+                int smaller = Math.min(keys,diff);
+                int bigger = Math.max(keys,diff);
+                int f1 = mp.get(keys);
+                int f2 = mp.get(diff);
+                for(int i=0; i<f1*f2; i++)
+                {
+                    res.add(new int[]{smaller,bigger});
+                }
+                mp.put(keys,0);
+                mp.put(diff,0);
+            }
+        }
+        Collections.sort(res, Comparator.comparingInt(a -> a[0]));
+        return res;
+    }
+}
