@@ -1,0 +1,23 @@
+/*Palindrome Linked List*/
+public class Solution {
+
+	public static boolean isPalindrome(LinkedListNode<Integer> head) {
+		// Write your code here!
+		left = head;
+		return isP(left);
+	}
+	static LinkedListNode<Integer> left;
+	static boolean isP(LinkedListNode<Integer> right)
+	{
+		if(right==null) return true;
+
+		boolean res = isP(right.next);
+		if(res == false) return false;
+		else if(right.data != left.data) return false;
+		else
+		{
+			left = left.next;
+			return true;
+		}
+	}
+}
