@@ -1,0 +1,44 @@
+/*Flatten a Linked List*/
+public class Solution {
+   
+    public static Node flattenLinkedList(Node head) {
+        Node prev = null;
+        Node curr = head;
+        while(curr!=null)
+        {
+            Node next = curr.next;
+            prev = merge(prev, curr);
+            prev.next= null;
+            curr.next = null;
+            curr = next;
+
+        }
+        return prev;
+    
+    }
+
+    public static Node merge(Node prev, Node curr) {
+        Node newhead = new Node(0);
+        Node h = newhead;
+        // prev.next=null;
+        // curr.next=null;
+        while (prev != null && curr != null) {
+            if (prev.data < curr.data) {
+                h.child = prev;
+                h = h.child;
+                prev = prev.child;
+            } else {
+                h.child = curr;
+                h = h.child;
+                curr = curr.child;
+            }
+        }
+        if (prev != null) 
+            h.child = prev;
+        else  
+            h.child = curr;
+            
+        return newhead.child;
+    }
+
+}
