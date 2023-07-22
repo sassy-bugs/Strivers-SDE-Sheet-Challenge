@@ -1,0 +1,30 @@
+/*Trapping Rain Water*/
+
+public class Solution {
+    public static long getTrappedWater(long []arr, int n) {
+        // Write your code here.
+        int l=0, r=n-1;
+        long max_l = 0;
+        long max_r = 0;
+
+        long amt = 0;
+
+        while(l<r)
+        {
+            max_l = Math.max(max_l,arr[l]);
+            max_r = Math.max(max_r,arr[r]);
+            
+            if(max_l<max_r)
+            {
+                amt += max_l-arr[l];
+                l++;
+            }
+            else
+            {
+                amt += max_r-arr[r];
+                r--;
+            }
+        }
+        return amt;
+    }
+}

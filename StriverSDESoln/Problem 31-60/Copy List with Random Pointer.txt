@@ -1,0 +1,51 @@
+/*Copy List with Random Pointer*/
+import java.io.*;
+import java.util.* ;
+
+/*************************************************************
+
+    Following is the LinkedListNode class structure
+
+    class LinkedListNode<T> {
+	    T data;
+	    LinkedListNode<T> next;
+	    LinkedListNode<T> random;
+
+	    public LinkedListNode(T data) {
+		    this.data = data;
+	    }
+    }
+
+*************************************************************/
+
+public class Solution {
+	public static LinkedListNode<Integer> cloneRandomList(LinkedListNode<Integer> head) {
+		// Write your code here.
+		HashMap<LinkedListNode<Integer>,LinkedListNode<Integer>> mp = new HashMap<>();
+		LinkedListNode<Integer> res = new LinkedListNode<>(-1);
+		LinkedListNode<Integer> temp = res;
+
+		LinkedListNode<Integer> chead = head;
+		while(chead!=null)
+		{
+			temp.next = new LinkedListNode<>(chead.data);
+			temp = temp.next;
+			mp.put(chead,temp);
+			chead = chead.next;
+			
+		}
+		chead = head;
+		temp = res.next;
+		while(chead!=null)
+		{
+			if(chead.random!=null)
+			{
+				temp.random = mp.get(chead.random);
+			}
+			temp = temp.next;
+			chead = chead.next;
+		}
+		return res.next;
+
+	}
+}
