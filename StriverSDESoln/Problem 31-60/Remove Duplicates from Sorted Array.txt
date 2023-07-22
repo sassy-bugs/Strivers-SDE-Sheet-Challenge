@@ -1,0 +1,18 @@
+/*Remove Duplicates from Sorted Array*/
+
+import java.util.ArrayList;
+public class Solution {
+	public static int removeDuplicates(ArrayList<Integer> arr,int n) {
+		// Write your code here.
+		int i = n-2;
+		while(i>=0)
+		{
+			if(arr.get(i) == arr.get(i+1))
+			{
+				arr.remove(i+1);
+			}
+			i--;
+		}
+		return arr.size();
+	}
+}

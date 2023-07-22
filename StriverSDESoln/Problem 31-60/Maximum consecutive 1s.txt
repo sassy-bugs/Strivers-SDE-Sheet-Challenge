@@ -1,0 +1,26 @@
+/*Maximum consecutive 1s*/
+
+import java.util.ArrayList;
+
+public class Solution {
+	public static int longestSubSeg(ArrayList<Integer> arr , int n, int k) {
+		// Write your code here.
+		int start = 0;
+		int cnt =0;
+		int max = 0;
+		for(int right=0; right<n; right++)
+		{
+			if(arr.get(right)==0) cnt++;
+			if(cnt>k)
+			{
+				while(cnt!=k)
+				{
+					if(arr.get(start)==0) cnt--;
+					start++;
+				}
+			}
+			max = Math.max(max, right-start+1);
+		}
+		return max;
+	}
+}

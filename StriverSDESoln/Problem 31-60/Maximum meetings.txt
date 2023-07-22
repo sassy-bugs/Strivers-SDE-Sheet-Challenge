@@ -1,0 +1,32 @@
+/*Maximum meetings*/
+
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static List<Integer> maximumMeetings(int[] start, int[] end) {        
+        //Write your code here
+        int total_meetings = start.length;
+        List<List<Integer>> meets = new ArrayList<>();
+        for(int i=0; i<total_meetings;i++)
+        {
+            List<Integer> meet = new ArrayList<>();
+            meet.add(start[i]);
+            meet.add(end[i]);
+            meet.add(i);
+            meets.add(meet);
+        }
+        Collections.sort(meets, (a,b)->(a.get(1)-b.get(1)));
+        List<Integer> res = new ArrayList<>();
+        res.add(meets.get(0).get(2)+1);
+        int finish = meets.get(0).get(1);
+        for(int i=1; i<meets.size();i++)
+        {
+            if(meets.get(i).get(0)>finish)
+            {
+                res.add(meets.get(i).get(2)+1);
+                finish = meets.get(i).get(1);
+            }
+        }
+        return res;
+    }
+}}
