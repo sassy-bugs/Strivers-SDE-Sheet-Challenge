@@ -1,0 +1,33 @@
+/*Kth Permutation*/
+
+import java.util.*;
+
+public class Solution {
+    public static String kthPermutation(int n, int k) {
+        // Write your code here.
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            numbers.add(i);
+        }
+
+        // Create an array to store factorials from 0 to n
+        int[] factorial = new int[n + 1];
+        factorial[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            factorial[i] = factorial[i - 1] * i;
+        }
+
+        // Find the k-th permutation
+        StringBuilder sb = new StringBuilder();
+        k--; // Convert k to 0-based index
+        for (int i = 1; i <= n; i++) {
+            int index = k / factorial[n - i];
+            sb.append(numbers.get(index));
+            numbers.remove(index);
+            k %= factorial[n - i];
+        }
+
+        return sb.toString();
+    }
+    
+}

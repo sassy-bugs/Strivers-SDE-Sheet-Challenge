@@ -1,0 +1,36 @@
+/*Subset II*/
+
+import java.util.*;
+
+public class Solution {
+    public static ArrayList<ArrayList<Integer>> uniqueSubsets(int n, int arr[]) {
+        Arrays.sort(arr); // Sort the array to ensure subsets are in lexicographical order
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        Set<ArrayList<Integer>> set = new HashSet<>();
+        helper(0, arr, new ArrayList<>(), res, set);
+        Collections.sort(res, (a, b) -> {
+            for (int i = 0; i < Math.min(a.size(), b.size()); i++) {
+                int cmp = Integer.compare(a.get(i), b.get(i));
+                if (cmp != 0)
+                    return cmp;
+            }
+            return Integer.compare(a.size(), b.size());
+        });
+        return res;
+    }
+
+    static void helper(int idx, int arr[], ArrayList<Integer> list, ArrayList<ArrayList<Integer>> res, Set<ArrayList<Integer>> set) {
+        if (idx == arr.length) {
+            if (!set.contains(list)) {
+                res.add(new ArrayList<>(list)); // Add a copy of the list
+            }
+            set.add(new ArrayList<>(list)); // Add a copy of the list to the set
+            return;
+        }
+        helper(idx + 1, arr, list, res, set);
+        list.add(arr[idx]);
+        helper(idx + 1, arr, list, res, set);
+        list.remove(list.size() - 1);
+        
+    }
+}

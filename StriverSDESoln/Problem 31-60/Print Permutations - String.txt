@@ -1,0 +1,33 @@
+/*Print Permutations - String*/
+
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static List<String> findPermutations(String s) {
+        // Write your code here.
+        res = new ArrayList<>();
+        helper(s.toCharArray(),0,s.length()-1);
+        return res;
+    }
+    static List<String> res;
+    static void helper(char arr[], int left, int right)
+    {
+        if(left == right)
+        {
+            res.add(new String(arr));
+            return;
+        }
+        for(int i=left; i<=right; i++)
+        {
+            swap(arr,left,i);
+            helper(arr,left+1,right);
+            swap(arr, left,i);
+        }
+    } 
+    private static void swap(char[] charArray, int i, int j) {
+        char temp = charArray[i];
+        charArray[i] = charArray[j];
+        charArray[j] = temp;
+    }
+
+}

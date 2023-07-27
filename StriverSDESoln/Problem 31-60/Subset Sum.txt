@@ -1,0 +1,28 @@
+/*Subset Sum*/
+
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static ArrayList<Integer> subsetSum(int num[]) {
+        // Write your code here..
+        res = new ArrayList<>();
+        sum(0,num,0);
+        Collections.sort(res);
+        return res;
+        
+    }
+    static ArrayList<Integer> res;
+    static void sum(int idx, int num[], int currSum)
+    {
+        if(idx == num.length)
+        {
+            res.add(currSum);
+            return;
+        }
+
+        sum(idx+1,num, currSum+num[idx]);
+        sum(idx+1, num, currSum);
+        return;
+    }
+
+}
